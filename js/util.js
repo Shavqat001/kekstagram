@@ -1,9 +1,10 @@
+import { NAMES, COMMENTS } from './data.js';
+
 function getRandomArrayElement(array) {
     return array[getRandomPositiveInteger(0, array.length - 1)]
 }
 
-
-const createPost = (index) => {
+function createPost(index) {
     return {
         id: index,
         name: getRandomArrayElement(NAMES),
@@ -13,10 +14,6 @@ const createPost = (index) => {
         avatar: `img/avatar-${getRandomPositiveInteger(1, 6)}.svg`,
         message: getRandomArrayElement(COMMENTS)
     }
-}
-
-function getRandomNumber(min, max) { // htmlacademy
-    return Math.floor(Math.random() * (max + 1 - min)) + min;
 }
 
 function lengthCalc(text, maxLength) {
@@ -40,3 +37,13 @@ function checkStringLength(string, length) {
 function print(log) {
     console.log(log);
 }
+
+function findEl(el, parent) {
+    if (parent) {
+        return parent.querySelector(el);
+    }
+
+    return document.querySelector(el);
+}
+
+export { createPost, getRandomPositiveInteger, print, findEl }
