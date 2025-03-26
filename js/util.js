@@ -1,4 +1,6 @@
-import { NAMES, COMMENTS } from './data.js';
+import { NAMES, COMMENTS, POSTS } from './data.js';
+
+print(POSTS)
 
 function getRandomArrayElement(array) {
     return array[getRandomPositiveInteger(0, array.length - 1)]
@@ -7,12 +9,16 @@ function getRandomArrayElement(array) {
 function createPost(index) {
     return {
         id: index,
-        name: getRandomArrayElement(NAMES),
         url: `photos/${index}.jpg`,
         description: 'Картинка',
         likes: getRandomPositiveInteger(15, 200),
+        message: getRandomArrayElement(COMMENTS),
+        name: getRandomArrayElement(NAMES),
         avatar: `img/avatar-${getRandomPositiveInteger(1, 6)}.svg`,
-        message: getRandomArrayElement(COMMENTS)
+        comments: Array.from(
+            { length: getRandomPositiveInteger(0, COMMENTS.length - 1) },
+            ((_, i) => getRandomArrayElement(COMMENTS))
+        )
     }
 }
 
@@ -46,4 +52,12 @@ function findEl(el, parent) {
     return document.querySelector(el);
 }
 
-export { createPost, getRandomPositiveInteger, print, findEl }
+function createComment() {
+    return {
+        "name": getRandomArrayElement(NAMES),
+        "avatar": `img/avatar-${getRandomPositiveInteger(1, 6)}.svg`,
+        "comment": getRandomArrayElement(COMMENTS)
+    }
+}
+
+export { createPost, createComment, getRandomPositiveInteger, getRandomArrayElement, print, findEl }

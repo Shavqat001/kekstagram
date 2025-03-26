@@ -1,9 +1,9 @@
-import { findEl, print } from "./util.js";
 import { POSTS } from "./data.js";
-print(POSTS)
+import { findEl, createComment, print } from "./util.js";
 
 let pictures = findEl('.pictures').querySelectorAll('.picture');
 let bigPicture = findEl('.big-picture');
+print(createComment())
 
 for (let i = 0; i < pictures.length; i++) {
     pictures[i].addEventListener('click', (e) => {
@@ -19,19 +19,23 @@ for (let i = 0; i < pictures.length; i++) {
         findEl('.comments-count', bigPicture).textContent = findEl('.picture__comments', pictures[i]).textContent;
 
         findEl('.social__comments').innerHTML = '';
-        findEl('.social__comments').innerHTML += `
-                <li class="social__comment">
-                    <img
-                        class="social__picture"
-                        src="${POSTS[i].avatar}"
-                        alt="${POSTS[i].name}"
-                        width="35" height="35">
-                    <p class="social__text">${POSTS[i].message}</p>
-                </li>
-            `;
+
+        POSTS[i].comments.forEach((_) => {
+            const { name, avatar, comment } = createComment();
+            findEl('.social__comments').innerHTML += `
+            <li class="social__comment">
+            <img
+            class="social__picture"
+            src="${avatar}"
+            alt="${name}"
+            width="35" height="35">
+            <p class="social__text">${_}</p>
+            </li>`;
+        })
     });
 }
-    
+
+
 document.addEventListener('keydown', (e) => {
     if (e.code == 'Escape') {
         bigPicture.classList.add('hidden');
