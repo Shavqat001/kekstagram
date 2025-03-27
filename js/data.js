@@ -1,4 +1,4 @@
-import { createPost } from './util.js';
+import { createPicture } from './util.js';
 
 const NAMES = [
     'Алексей', "Андрей", "Антон",
@@ -30,6 +30,6 @@ const COMMENTS = [
     'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
 ];
 
-const POSTS = Array.from({ length: 25 }, (_, i) => createPost(i + 1));
+const POSTS = Array.from({ length: 25 }, (_, i) => createPicture(i + 1));
 
 export { NAMES, DESCRIPTIONS, COMMENTS, POSTS }
