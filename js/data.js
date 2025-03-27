@@ -1,10 +1,24 @@
 import { createPost } from './util.js';
 
 const NAMES = [
-    'Алексей', "Андрей", "Антон", 
-    'Вадим', 'Валерий', 'Василий', 'Евгений', 
-    'Иван', 'Михаил', 'Николай', 'Олег', 'Пётр', 
+    'Алексей', "Андрей", "Антон",
+    'Вадим', 'Валерий', 'Василий', 'Евгений',
+    'Иван', 'Михаил', 'Николай', 'Олег', 'Пётр',
     'Руслан', 'Сергей', 'Тимур', 'Фёдор'
+];
+
+const DESCRIPTIONS = [
+    'Летний чил на югах. #тай #отдых #лето #чил #travel #travelgram #summergram #chill',
+    'Тестим новую камеру! #camera #test #new #newcameratest #pic #photo #instaphoto',
+    'Затусили с друзьями на море #laptevsea #north #northeastpassage',
+    'Как же круто тут кормят #food #foodgram #instafood #delicious #yummy',
+    'Отдыхаем... #chill #relax #group #photo',
+    'Цените каждое мгновенье. Цените тех, кто рядом с вами и отгоняйте все сомненья. Не обижайте всех словами......',
+    'Вот это тачка! #wow #car #carwow #drive',
+    '#fun #party #cool #young',
+    'Господи, это такая милота, я сейчас умру от нежности, у меня закшалил мимимиметр',
+    'Хорошо, когда в жизни есть #друзья, которые вместе со мной могут зайти в #барнарубинштейна и бахнуть #пивка',
+    'Норм',
 ];
 
 const COMMENTS = [
@@ -18,4 +32,4 @@ const COMMENTS = [
 
 const POSTS = Array.from({ length: 25 }, (_, i) => createPost(i + 1));
 
-export { NAMES, COMMENTS, POSTS }
+export { NAMES, DESCRIPTIONS, COMMENTS, POSTS }

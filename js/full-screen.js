@@ -1,49 +1,56 @@
 import { POSTS } from "./data.js";
-import { findEl, createComment, print } from "./util.js";
+import { findEl, createComment, createPost } from "./util.js";
 
-let pictures = findEl('.pictures').querySelectorAll('.picture');
-let bigPicture = findEl('.big-picture');
-print(createComment())
+const pictures = findEl('.pictures').querySelectorAll('.picture');
+const body = document.body;
+const socialCommentCount = findEl('.social__comment-count');
+const commentsLoader = findEl('.comments-loader');
+const bigPicture = findEl('.big-picture');
+const bigPictureImg = findEl('.big-picture__img img', bigPicture);
+const likesCount = findEl('.likes-count', bigPicture);
+const commentsCount = findEl('.comments-count', bigPicture);
+const socialComments = findEl('.social__comments');
 
-for (let i = 0; i < pictures.length; i++) {
-    pictures[i].addEventListener('click', (e) => {
+pictures.forEach((picture, i) => {
+    picture.addEventListener('click', (e) => {
         e.preventDefault();
 
         bigPicture.classList.remove('hidden');
-        findEl('.social__comment-count').classList.add('hidden');
-        findEl('.comments-loader').classList.add('hidden');
-        document.body.classList.add('modal-open');
+        socialCommentCount.classList.add('hidden');
+        commentsLoader.classList.add('hidden');
+        body.classList.add('modal-open');
 
-        findEl('.big-picture__img img', bigPicture).src = findEl('.picture__img', pictures[i]).src;
-        findEl('.likes-count', bigPicture).textContent = findEl('.picture__likes', pictures[i]).textContent;
-        findEl('.comments-count', bigPicture).textContent = findEl('.picture__comments', pictures[i]).textContent;
+        bigPictureImg.src = findEl('.picture__img', picture).src;
+        likesCount.textContent = findEl('.picture__likes', picture).textContent;
+        commentsCount.textContent = findEl('.picture__comments', picture).textContent;
+        socialComments.innerHTML = '';
 
-        findEl('.social__comments').innerHTML = '';
+        const { name, avatar, comments } = POSTS[i];
 
-        POSTS[i].comments.forEach((_) => {
-            const { name, avatar, comment } = createComment();
-            findEl('.social__comments').innerHTML += `
-            <li class="social__comment">
-            <img
-            class="social__picture"
-            src="${avatar}"
-            alt="${name}"
-            width="35" height="35">
-            <p class="social__text">${_}</p>
-            </li>`;
-        })
+        comments.forEach((_) => {
+            socialComments.innerHTML += `
+                <li class="social__comment">
+                    <img
+                        class="social__picture"
+                        src="${avatar}"
+                        alt="${name}"
+                    width="35" height="35">
+
+                    <p class="social__text">${_}</p>
+                </li>`;
+        });
     });
-}
+});
 
+function closeModal() {
+    bigPicture.classList.add('hidden');
+    document.body.classList.remove('modal-open');
+}
 
 document.addEventListener('keydown', (e) => {
     if (e.code == 'Escape') {
-        bigPicture.classList.add('hidden');
-        document.body.classList.remove('modal-open');
+        closeModal();
     }
 })
 
-findEl('.big-picture__cancel').addEventListener('click', () => {
-    bigPicture.classList.add('hidden');
-    document.body.classList.remove('modal-open');
-})
+findEl('.big-picture__cancel').addEventListener('click', closeModal);

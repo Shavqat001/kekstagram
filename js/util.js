@@ -1,7 +1,5 @@
 import { NAMES, COMMENTS, POSTS } from './data.js';
-
 print(POSTS)
-
 function getRandomArrayElement(array) {
     return array[getRandomPositiveInteger(0, array.length - 1)]
 }
@@ -10,9 +8,16 @@ function createPost(index) {
     return {
         id: index,
         url: `photos/${index}.jpg`,
-        description: 'Картинка',
+        description: getRandomArrayElement(descriptions),
         likes: getRandomPositiveInteger(15, 200),
         message: getRandomArrayElement(COMMENTS),
+
+    }
+}
+
+function createComment(index) {
+    return {
+        id: index,
         name: getRandomArrayElement(NAMES),
         avatar: `img/avatar-${getRandomPositiveInteger(1, 6)}.svg`,
         comments: Array.from(
@@ -56,7 +61,10 @@ function createComment() {
     return {
         "name": getRandomArrayElement(NAMES),
         "avatar": `img/avatar-${getRandomPositiveInteger(1, 6)}.svg`,
-        "comment": getRandomArrayElement(COMMENTS)
+        "comments": Array.from(
+            { length: getRandomPositiveInteger(0, COMMENTS.length - 1) },
+            ((_, i) => getRandomArrayElement(COMMENTS))
+        )
     }
 }
 
