@@ -1,13 +1,13 @@
-import { findEl, print } from "./util.js";
+import { findEl } from "./util.js";
 import { POSTS } from "./data.js";
 
-let pictureTemplate = document.querySelector('#picture').content;
+let pictureTemplate = document.querySelector("#picture").content;
 
-POSTS.forEach((post) => {
-    let picture = findEl('.picture', pictureTemplate).cloneNode(true);
-    findEl('.picture__img', picture).src = post.url;
-    findEl('.picture__img', picture).alt = post.description;
-    findEl('.picture__likes', picture).textContent = post.likes;
-    findEl('.picture__comments', picture).textContent = post.comments.length;
-    findEl('.pictures').append(picture);
+POSTS.forEach(({ url, description, likes, comments }) => {
+  let picture = findEl(".picture", pictureTemplate).cloneNode(true);
+  findEl(".picture__img", picture).src = url;
+  findEl(".picture__img", picture).alt = description;
+  findEl(".picture__likes", picture).textContent = likes;
+  findEl(".picture__comments", picture).textContent = comments.length;
+  findEl(".pictures").append(picture);
 });

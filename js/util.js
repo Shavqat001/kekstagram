@@ -1,5 +1,5 @@
 import { NAMES, DESCRIPTIONS, COMMENTS, POSTS } from "./data.js";
-print(POSTS);
+
 function getRandomArrayElement(array) {
   return array[getRandomPositiveInteger(0, array.length - 1)];
 }
@@ -57,10 +57,16 @@ function findEl(el, parent) {
   return document.querySelector(el);
 }
 
+function isEsc(e) {
+  return e.key === 'Escape'
+}
+
 export {
   createPicture,
+  isEsc,
   getRandomPositiveInteger,
   getRandomArrayElement,
   print,
   findEl,
+  checkStringLength,
 };

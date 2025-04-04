@@ -15,16 +15,12 @@ const socialCount = findEl(".social__caption");
 pictures.forEach((picture, i) => {
   picture.addEventListener("click", (e) => {
     e.preventDefault();
-
     openModal();
 
     bigPictureImg.src = findEl(".picture__img", picture).src;
     likesCount.textContent = findEl(".picture__likes", picture).textContent;
     socialCount.textContent = POSTS[i].description;
-    commentsCount.textContent = findEl(
-      ".picture__comments",
-      picture
-    ).textContent;
+    commentsCount.textContent = findEl(".picture__comments", picture).textContent;
 
     createComments(POSTS[i].comments);
   });
@@ -33,7 +29,7 @@ pictures.forEach((picture, i) => {
 function createComments(comments) {
   socialComments.innerHTML = "";
 
-  comments.forEach(({avatar, name, message}) => {
+  comments.forEach(({ avatar, name, message }) => {
     const li = document.createElement("li");
     li.classList.add("social__comment");
     const img = document.createElement("img");
