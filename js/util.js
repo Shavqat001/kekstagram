@@ -58,7 +58,7 @@ function findEl(el, parent) {
 }
 
 function isEsc(e) {
-  return e.key === 'Escape'
+  return e.key === 'Escape';
 }
 
 export {
