@@ -1,5 +1,5 @@
 import { POSTS } from "./data.js";
-import { findEl } from "./util.js";
+import { findEl, isEsc } from "./util.js";
 
 const pictures = findEl(".pictures").querySelectorAll(".picture");
 const body = document.body;
@@ -60,7 +60,7 @@ function openModal() {
 }
 
 document.addEventListener("keydown", (e) => {
-  if (e.code == "Escape") {
+  if (isEsc(e)) {
     closeModal();
   }
 });

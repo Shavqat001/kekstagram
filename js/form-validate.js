@@ -1,40 +1,32 @@
-import { HASHTAGRULES } from "./data.js";
-import { findEl, isEsc, print } from "./util.js";
+import { findEl, isEsc, stopEscEvent, checkHashTags } from "./util.js";
 
+const body = document.body;
 const formUpload = findEl(".img-upload__form");
 const modal = findEl(".img-upload__overlay");
 const uploadFile = findEl("#upload-file");
-const hashTags = findEl(".text__hashtags");
-
-uploadFile.addEventListener("change", openModal);
-
-findEl(".img-upload__cancel").addEventListener("click", closeModal);
-
-function handleUploadFile() {
-  document.body.addEventListener("keydown", (e) => {
-    isEsc(e) ? closeModal() : "";
-  });
-}
-
+const hashTagField = findEl(".text__hashtags");
+const comments = findEl(".text__description");
+const closeModalBtn = findEl(".img-upload__cancel");
 const pristine = new Pristine(formUpload, {
   classTo: "text__wrapper",
   errorTextParent: "text__wrapper",
   errorTextClass: "text__wrapper--error",
 });
 
-function checkHashTags(value) {
-  if (
-    value.startsWith("#") &&
-    /^#[a-zA-Zа-яА-Я0-9]+$/.test(value) &&
-    value.split("#").every((el) => el.length <= 20) &&
-    value.split("#").length
-  ) {
-    return true;
-  }
-  return false;
-}
+hashTagField.addEventListener("keydown", (e) => stopEscEvent(e));
+comments.addEventListener("keydown", (e) => stopEscEvent(e));
+uploadFile.addEventListener("change", openModal);
+closeModalBtn.addEventListener("click", closeModal);
 
-pristine.addValidator(hashTags, checkHashTags, `неправильно заполнены хештеги`);
+const handleUploadFile = body.addEventListener("keydown", (e) => {
+  if (isEsc(e)) closeModal();
+});
+
+pristine.addValidator(
+  hashTagField,
+  checkHashTags,
+  `неправильно заполнены хештеги`
+);
 
 formUpload.addEventListener("submit", (e) => {
   const isValid = pristine.validate();
@@ -47,14 +39,15 @@ formUpload.addEventListener("submit", (e) => {
 });
 
 function closeModal() {
-  document.body.classList.remove("modal-open");
+  body.classList.remove("modal-open");
   modal.classList.add("hidden");
   document.body.removeEventListener("keydown", handleUploadFile);
   formUpload.reset();
+  pristine.reset();
 }
 
 function openModal() {
+  body.classList.add("modal-open");
   modal.classList.remove("hidden");
-  document.body.classList.add("modal-open");
-  document.body.addEventListener("keydown", handleUploadFile);
+  body.addEventListener("keydown", handleUploadFile);
 }

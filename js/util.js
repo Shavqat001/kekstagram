@@ -58,7 +58,29 @@ function findEl(el, parent) {
 }
 
 function isEsc(e) {
-  return e.key === 'Escape';
+  return e.key === "Escape";
+}
+
+function stopEscEvent(e) {
+  if (isEsc(e)) {
+    e.stopPropagation();
+  }
+}
+
+function checkHashTags(value) {
+  if (!value.trim()) return true;
+  const hashtags = value.split(/\s/);
+  const set = new Set();
+
+  for (const tag of hashtags) {
+    if (tag === "#") return false;
+    if (!/^#[a-zA-Zа-яА-Я0-9]+$/.test(tag)) return false;
+    if (tag.length > 20) return false;
+    if (set.has(tag.toLowerCase())) return false;
+    set.add(tag.toLowerCase());
+  }
+
+  return hashtags.length <= 5;
 }
 
 export {
@@ -69,4 +91,6 @@ export {
   print,
   findEl,
   checkStringLength,
+  stopEscEvent,
+  checkHashTags,
 };
