@@ -20,9 +20,15 @@ pictures.forEach((picture, i) => {
     bigPictureImg.src = findEl(".picture__img", picture).src;
     likesCount.textContent = findEl(".picture__likes", picture).textContent;
     socialCount.textContent = POSTS[i].description;
-    commentsCount.textContent = findEl(".picture__comments", picture).textContent;
+    commentsCount.textContent = findEl(
+      ".picture__comments",
+      picture
+    ).textContent;
 
     createComments(POSTS[i].comments);
+    
+    socialCommentCount.classList.remove("hidden");
+    commentsLoader.classList.remove("hidden");
   });
 });
 
