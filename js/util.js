@@ -21,7 +21,7 @@ function createPicture(index) {
     url: `photos/${index}.jpg`,
     description: getRandomArrayElement(DESCRIPTIONS),
     likes: getRandomPositiveInteger(15, 200),
-    comments: Array.from({ length: getRandomPositiveInteger(0, 6) }, (_, i) =>
+    comments: Array.from({ length: getRandomPositiveInteger(0, 20) }, (_, i) =>
       createComment(i + 1)
     ),
   };
