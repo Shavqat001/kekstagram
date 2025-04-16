@@ -1,4 +1,4 @@
-import { NAMES, DESCRIPTIONS, COMMENTS, POSTS } from "./data.js";
+import { NAMES, DESCRIPTIONS, COMMENTS } from "./data.js";
 
 function getRandomArrayElement(array) {
   return array[getRandomPositiveInteger(0, array.length - 1)];
