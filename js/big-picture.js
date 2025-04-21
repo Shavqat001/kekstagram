@@ -34,8 +34,6 @@ pictures.forEach((picture, i) => {
 commentsLoader.addEventListener("click", () => {
   maxComments += 5;
 
-  console.log(maxComments, currentPost.comments.length);
-
   if (maxComments >= currentPost.comments.length) {
     commentsLoader.classList.add("hidden");
   }
