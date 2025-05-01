@@ -42,6 +42,69 @@ const COMMENTS = [
   "Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!",
 ];
 
+const EFFECTS = [
+  {
+    value: "none",
+    filter: () => "none",
+    step: 1,
+    start: 3,
+    range: {
+      min: 0,
+      max: 100,
+    },
+  },
+  {
+    value: "chrome",
+    filter: (value) => `grayscale(${value})`,
+    step: 0.1,
+    start: 0.7,
+    range: {
+      min: 0,
+      max: 1,
+    },
+  },
+  {
+    value: "sepia",
+    filter: (value) => `sepia(${value})`,
+    step: 0.1,
+    start: 0.3,
+    range: {
+      min: 0,
+      max: 1,
+    },
+  },
+  {
+    value: "marvin",
+    filter: (value) => `invert(${value}%)`,
+    step: 1,
+    start: 100,
+    range: {
+      min: 0,
+      max: 100,
+    },
+  },
+  {
+    value: "phobos",
+    filter: (value) => `blur(${value}px)`,
+    step: 0.1,
+    start: 0.8,
+    range: {
+      min: 0,
+      max: 3,
+    },
+  },
+  {
+    value: "heat",
+    filter: (value) => `brightness(${value})`,
+    step: 0.1,
+    start: 2.1,
+    range: {
+      min: 1,
+      max: 3,
+    },
+  },
+];
+
 const POSTS = Array.from({ length: 25 }, (_, i) => createPicture(i + 1));
 
-export { NAMES, DESCRIPTIONS, COMMENTS, POSTS };
+export { NAMES, DESCRIPTIONS, COMMENTS, EFFECTS, POSTS };

@@ -7,10 +7,11 @@ const uploadFile = findEl("#upload-file");
 const hashTagField = findEl(".text__hashtags");
 const comments = findEl(".text__description");
 const closeModalBtn = findEl(".img-upload__cancel");
+
 const pristine = new Pristine(formUpload, {
-  classTo: "text__wrapper",
-  errorTextParent: "text__wrapper",
-  errorTextClass: "text__wrapper--error",
+  classTo: "img-upload__element",
+  errorTextParent: "img-upload__element",
+  errorTextClass: "img-upload__element--error",
 });
 
 hashTagField.addEventListener("keydown", (e) => stopEscEvent(e));
